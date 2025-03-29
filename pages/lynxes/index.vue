@@ -1,12 +1,19 @@
 <template>
   <div class="lynxes-page">
+
+    <div class="logo-container">
+      <NuxtLink to="/">
+        <img src="/logo.png" alt="Логотип" class="logo">
+      </NuxtLink>
+    </div>
+
     <div class="header">
       <h1 class="page-title">Рыси</h1>
       <p class="page-subtitle">Здесь вы найдете информацию о рысях.</p>
     </div>
     <div class="cards-container">
       <Card v-for="(c, index) in myCats"
-            :key="index" :imageName="c.imageName" :caption="c.caption" :description="c.description" :link= "c.link"/>
+            :key="index" :imageName="c.imageName" :caption="c.caption" :description="c.description" :link="c.link"/>
     </div>
   </div>
 </template>
@@ -47,6 +54,18 @@ const myCats = reactive([
 </script>
 
 <style scoped>
+
+.logo-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.logo {
+  width: 80px; /* Фиксированный размер */
+  height: auto;
+}
 
 .lynxes-page {
   padding: 2rem;
@@ -92,36 +111,14 @@ const myCats = reactive([
   }
 }
 
-/* Адаптация для экранов меньше 992px */
-@media (max-width: 992px) {
+
+@media (max-width: 700px) {
   .page-title {
-    font-size: 2rem; /* Уменьшаем размер заголовка */
+    font-size: 2.5rem; /* Уменьшаем размер заголовка */
   }
 
   .page-subtitle {
-    font-size: 1rem; /* Уменьшаем размер подзаголовка */
-  }
-}
-
-/* Адаптация для экранов меньше 768px */
-@media (max-width: 768px) {
-  .page-title {
-    font-size: 1.75rem; /* Уменьшаем размер заголовка */
-  }
-
-  .page-subtitle {
-    font-size: 0.875rem; /* Уменьшаем размер подзаголовка */
-  }
-}
-
-/* Адаптация для экранов меньше 576px */
-@media (max-width: 576px) {
-  .page-title {
-    font-size: 1.5rem; /* Уменьшаем размер заголовка */
-  }
-
-  .page-subtitle {
-    font-size: 0.75rem; /* Уменьшаем размер подзаголовка */
+    font-size: 1.5rem; /* Уменьшаем размер подзаголовка */
   }
 }
 

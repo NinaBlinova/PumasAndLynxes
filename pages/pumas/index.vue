@@ -6,7 +6,7 @@
     </div>
     <div class="cards-container">
       <Card v-for="(c, index) in myCats"
-            :key="index" :imageName="c.imageName" :caption="c.caption" :description="c.description" :link= "c.link"/>
+            :key="index" :imageName="c.imageName" :caption="c.caption" :description="c.description" :link="c.link"/>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ const myCats = reactive([
   {
     imageName: "PumaConcolorCouguar.png",
     caption: "Восточная пума",
-    description: "Восточная пума распространёна в Северной Америке (от юга Канады до Гватемалы и Белиза);, включает редких флоридских пум. ",
+    description: "Восточная пума распространёна в Северной Америке (от юга Канады до Гватемалы и Белиза), включает редких флоридских пум. ",
     link: "pumas/couguar"
   },
   {
@@ -33,7 +33,7 @@ const myCats = reactive([
 
   {
     imageName: "PumaConcolorConcolor.png",
-    caption: "Puma concolor concolor",
+    caption: "Южно-американская",
     description: "Южно-американская пума обитает в северной части Южной Америки (Колумбия, " +
         "Венесуэла, Гайана, Гвиана, Эквадор, Перу, Боливия);",
     link: "pumas/concolor"

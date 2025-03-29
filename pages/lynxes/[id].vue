@@ -1,6 +1,13 @@
 <template>
   <div class="animal-page">
     <!--    <pre>{{ lynx }}</pre>-->
+
+    <div class="logo-container">
+      <NuxtLink to="/lynxes">
+        <img src="/logo.png" alt="Логотип" class="logo">
+      </NuxtLink>
+    </div>
+
     <div class="animal-header"><h1>{{ lynx.caption }}</h1></div>
     <div class="animal-grid">
       <div class="animal-image">
@@ -47,6 +54,19 @@ console.log('Загруженные данные:', lynx)
 
 
 <style scoped>
+
+.logo-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.logo {
+  width: 80px;  /* Фиксированный размер */
+  height: auto;
+}
+
 .animal-header {
   text-align: center;
   font-weight: bold;
