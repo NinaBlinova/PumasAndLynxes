@@ -100,18 +100,6 @@ const myCats = reactive([
 }
 
 
-/* Адаптация для экранов меньше 1200px */
-@media (max-width: 1200px) {
-  .page-title {
-    font-size: 2.5rem; /* Уменьшаем размер заголовка */
-  }
-
-  .page-subtitle {
-    font-size: 1.25rem; /* Уменьшаем размер подзаголовка */
-  }
-}
-
-
 @media (max-width: 700px) {
   .page-title {
     font-size: 2.5rem; /* Уменьшаем размер заголовка */

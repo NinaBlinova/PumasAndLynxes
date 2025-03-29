@@ -1,5 +1,12 @@
 <template>
   <div class="pumas-page">
+
+    <div class="logo-container">
+      <NuxtLink to="/">
+        <img src="/logo.png" alt="Логотип" class="logo">
+      </NuxtLink>
+    </div>
+
     <div class="header">
       <h1 class="page-title">Пумы</h1>
       <p class="page-subtitle">Здесь вы найдете информацию о пумах.</p>
@@ -9,11 +16,30 @@
             :key="index" :imageName="c.imageName" :caption="c.caption" :description="c.description" :link="c.link"/>
     </div>
   </div>
+
+  <hr>
+  <div class="change-info">
+    <h1>Изменить информацию</h1>
+    <UButtonGroup>
+      <UButton color="neutral" variant="subtle" label="Settings"/>
+
+      <UDropdownMenu :items="items">
+        <UButton
+            color="neutral"
+            variant="outline"
+            icon="i-lucide-chevron-down"
+        />
+      </UDropdownMenu>
+    </UButtonGroup>
+  </div>
+  <hr>
+
 </template>
 
-<script setup>
-import Card from "../components/Card.vue"
+<script setup lang="ts">
+import Card from "~/components/Card.vue"
 import {reactive} from "vue";
+import type {DropdownMenuItem} from '@nuxt/ui'
 
 
 const myCats = reactive([
@@ -39,9 +65,44 @@ const myCats = reactive([
     link: "pumas/concolor"
   }
 ])
+const items: DropdownMenuItem[] = [
+  {
+    label: 'Добавить пуму',
+    icon: 'i-lucide-plus',
+    click: () => console.log('Добавить кошку')
+  },
+  {
+    label: 'Изменить информацию о пуме',
+    icon: 'i-lucide-square-pen',
+    children: [
+      {
+        label: 'Поменять карточку',
+        icon: 'i-lucide-pen',
+        click: () => console.log('Поменять карточку')
+      },
+      {
+        label: 'Поменять описание',
+        icon: 'i-lucide-pen-line',
+        click: () => console.log('Поменять описание')
+      }
+    ]
+  }
+]
 </script>
 
 <style scoped>
+.logo-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.logo {
+  width: 80px; /* Фиксированный размер */
+  height: auto;
+}
+
 .pumas-page {
   padding: 2rem;
   text-align: center;
@@ -57,6 +118,20 @@ const myCats = reactive([
 
 .header {
   margin-bottom: 3rem;
+}
+
+.change-info {
+  margin-bottom: 0.5vh;
+  text-align: center;
+}
+
+.change-info h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .page-title {
@@ -75,47 +150,13 @@ const myCats = reactive([
 }
 
 
-/* Адаптация для экранов меньше 1200px */
-@media (max-width: 1200px) {
+@media (max-width: 700px) {
   .page-title {
     font-size: 2.5rem; /* Уменьшаем размер заголовка */
   }
 
   .page-subtitle {
-    font-size: 1.25rem; /* Уменьшаем размер подзаголовка */
-  }
-}
-
-/* Адаптация для экранов меньше 992px */
-@media (max-width: 992px) {
-  .page-title {
-    font-size: 2rem; /* Уменьшаем размер заголовка */
-  }
-
-  .page-subtitle {
-    font-size: 1rem; /* Уменьшаем размер подзаголовка */
-  }
-}
-
-/* Адаптация для экранов меньше 768px */
-@media (max-width: 768px) {
-  .page-title {
-    font-size: 1.75rem; /* Уменьшаем размер заголовка */
-  }
-
-  .page-subtitle {
-    font-size: 0.875rem; /* Уменьшаем размер подзаголовка */
-  }
-}
-
-/* Адаптация для экранов меньше 576px */
-@media (max-width: 576px) {
-  .page-title {
-    font-size: 1.5rem; /* Уменьшаем размер заголовка */
-  }
-
-  .page-subtitle {
-    font-size: 0.75rem; /* Уменьшаем размер подзаголовка */
+    font-size: 1.5rem; /* Уменьшаем размер подзаголовка */
   }
 }
 </style>
