@@ -25,7 +25,9 @@
       </div>
       <img class="puma" src="/public/pumasHome.png" alt="Puma"/>
       <div class="map">bla bla</div>
-      <button class="more-btn">More</button>
+      <NuxtLink to="/gallery">
+        <button class="more-btn">More</button>
+      </NuxtLink>
 
     </div>
   </div>
@@ -259,7 +261,7 @@ const myCats = reactive([
 
   .more-btn {
     position: static;
-    width: 50%;
+    width: 100%;
     height: auto;
     padding: 10px;
     font-size: 4vw;
