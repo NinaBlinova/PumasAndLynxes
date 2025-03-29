@@ -92,6 +92,7 @@ const myCats = reactive([
   position: relative;
 }
 
+
 .icon {
   width: 20%;
   height: auto;
@@ -204,5 +205,75 @@ const myCats = reactive([
   border-radius: 10px; /* Скругляем углы */
   box-sizing: border-box; /* Учитываем padding в размерах */
   margin-bottom: 3vw; /* Добавляем отступ снизу, чтобы подвал не упирался в элемент */
+}
+
+
+/* Медиазапрос для очень маленьких экранов */
+@media (max-width: 700px) {
+  .banner {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .text-content {
+    width: 90%;
+    padding-left: 0;
+    font-size: 3vw;
+  }
+
+  .puma {
+    position: static;
+    width: 60%;
+    margin-top: 10px;
+  }
+
+  .first {
+    flex-direction: row;
+    position: static;
+    width: 60%;
+    margin-top: 10px;
+  }
+
+  .lynx {
+    position: static;
+    width: 60%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .map {
+    width: 90%;
+    position: static;
+    margin: 10px auto;
+    font-size: 4vw;
+  }
+
+  .more-btn {
+    position: static;
+    width: 50%;
+    height: auto;
+    padding: 10px;
+    font-size: 4vw;
+    margin: 10px auto;
+  }
+
+  .cardsHomeCats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map2 {
+    width: 90%;
+    padding: 10vw;
+  }
 }
 </style>

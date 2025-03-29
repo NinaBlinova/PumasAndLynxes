@@ -20,17 +20,17 @@ const props = defineProps({
 const imageUrl = computed(() => {
   return new URL(`/public/${props.imageName}`, import.meta.url).href;
 });
-
 </script>
 
 <style scoped>
 .card {
-  margin-left: 3vw; /* отступ слева */
-  margin-top: 5vh; /* отступ сверху */
+  margin-left: 20px; /* Фиксированный отступ */
+  margin-top: 30px; /* Фиксированный отступ */
   background: #FFFBF0;
-  padding: 2vw; /* padding относительно ширины окна */
-  border-radius: 1vw; /* скругление углов */
-  width: 20vw; /* ширина карты зависит от ширины окна */
+  padding: 20px; /* Фиксированный padding */
+  border-radius: 10px; /* Фиксированное скругление */
+  width: 300px; /* Фиксированная ширина или min-width */
+  min-width: 250px; /* Минимальная ширина */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
@@ -38,29 +38,29 @@ const imageUrl = computed(() => {
 .card-image {
   width: 100%;
   height: auto;
-  border-radius: 1vw;
+  border-radius: 10px;
 }
 
 .card-title {
-  font-size: 2vw; /* размер шрифта зависит от ширины окна */
-  margin: 1vh 0; /* вертикальные отступы от заголовка */
+  font-size: 1.5rem; /* Фиксированный размер */
+  margin: 10px 0; /* Фиксированные отступы */
 }
 
 .card-description {
-  font-size: 1vw;
+  font-size: 1rem; /* Фиксированный размер */
   color: #666;
-  text-indent: 1.5em; /* отступ с красной строки */
-  text-align: justify; /* выравнивание по ширине */
+  text-indent: 1.5em;
+  text-align: justify;
 }
 
 .more-btn {
-  margin-top: 2vh; /* отступ сверху кнопки */
-  padding: 1.5rem 2rem; /* уменьшение отступов */
-  font-size: 1.5vw; /* размер шрифта кнопки */
+  margin-top: 15px;
+  padding: 12px 24px; /* Фиксированные отступы */
+  font-size: 1rem; /* Фиксированный размер */
   color: #fff;
   background-color: #333;
   border: none;
-  border-radius: 0.5vw; /* скругление углов кнопки */
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -70,13 +70,24 @@ const imageUrl = computed(() => {
 }
 
 .nuxt-link {
-  text-decoration: none; /* Убираем подчеркивание */
-  color: inherit; /* Наследуем цвет текста от родителя */
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Убираем фиолетовый цвет после нажатия */
 .nuxt-link:visited {
-  color: inherit; /* Наследуем цвет текста от родителя */
+  color: inherit;
 }
 
+/* Медиазапрос для очень маленьких экранов */
+@media (max-width: 480px) {
+  .card {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+}
 </style>
