@@ -209,7 +209,7 @@ const myCats = reactive([
 
 
 /* Медиазапрос для очень маленьких экранов */
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .banner {
     flex-direction: column;
     height: auto;
