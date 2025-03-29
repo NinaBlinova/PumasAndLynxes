@@ -1,5 +1,6 @@
 <template>
   <div class="animal-page">
+    <!--    <pre>{{ lynx }}</pre>-->
     <div class="animal-header"><h1>{{ lynx.caption }}</h1></div>
     <div class="animal-grid">
       <div class="animal-image">
@@ -13,14 +14,22 @@
       <div class="animal-facts">
         <h2>Интересные факты</h2>
         <ul>
-          <li>Продолжительность жизни: 10-15 лет</li>
-          <li>Ареал обитания: Северные леса</li>
-          <li>Особенности: Кисточки на ушах</li>
+          <li>{{ lynx.fact1 }}</li>
+          <li>{{ lynx.fact2 }}</li>
+          <li>{{ lynx.fact3 }}</li>
+          <li>{{ lynx.fact4 }}</li>
+          <li>{{ lynx.fact5 }}</li>
         </ul>
       </div>
 
+      <div>
+        <img :src="`/${lynx.imgName2}`" v-if="lynx.imgName2" :alt="lynx.caption" class="my-img"/>
+      </div>
     </div>
   </div>
+
+
+  <div class="map2"> bla bla</div>
 </template>
 
 <script setup>
@@ -78,9 +87,6 @@ console.log('Загруженные данные:', lynx)
   grid-area: description;
   align-self: center;
   text-align: justify;
-}
-
-.animal-description p {
   text-indent: 40px;
   font-size: 1.1rem;
   line-height: 1.6;
@@ -90,8 +96,11 @@ console.log('Загруженные данные:', lynx)
 .animal-facts {
   grid-area: facts;
   background: #f8f8f8;
-  padding: 20px;
   border-radius: 10px;
+  text-indent: 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
 }
 
 .animal-facts h2 {
@@ -134,6 +143,18 @@ console.log('Загруженные данные:', lynx)
   .animal-header h1 {
     font-size: 2rem;
   }
+}
 
+.map2 {
+  width: 90%; /* Задаем ширину 60% от экрана */
+  height: auto; /* Высота карты будет адаптироваться */
+  background: #ccc; /* Примерный фон для карты */
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5vw; /* Добавляем отступы внутри карты */
+  border-radius: 10px; /* Скругляем углы */
+  box-sizing: border-box; /* Учитываем padding в размерах */
+  margin-bottom: 3vw; /* Добавляем отступ снизу, чтобы подвал не упирался в элемент */
 }
 </style>

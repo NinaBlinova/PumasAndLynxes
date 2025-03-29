@@ -7,8 +7,14 @@ export default defineContentConfig({
             source: 'lynxes/**.json',
             schema: z.object({
                 imageName: z.string(),
+                imgName2: z.string(),
                 caption: z.string(),
                 description: z.string(),
+                fact1: z.string(),
+                fact2: z.string(),
+                fact3: z.string(),
+                fact4: z.string(),
+                fact5: z.string(),
                 slug: z.string()
             })
         })
