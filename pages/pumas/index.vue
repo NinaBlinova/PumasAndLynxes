@@ -20,17 +20,7 @@
   <hr>
   <div class="change-info">
     <h1>Изменить информацию</h1>
-    <UButtonGroup>
-      <UButton color="neutral" variant="subtle" label="Settings"/>
 
-      <UDropdownMenu :items="items">
-        <UButton
-            color="neutral"
-            variant="outline"
-            icon="i-lucide-chevron-down"
-        />
-      </UDropdownMenu>
-    </UButtonGroup>
   </div>
   <hr>
 
@@ -39,8 +29,6 @@
 <script setup lang="ts">
 import Card from "~/components/Card.vue"
 import {reactive} from "vue";
-import type {DropdownMenuItem} from '@nuxt/ui'
-
 
 const myCats = reactive([
   {
@@ -65,29 +53,7 @@ const myCats = reactive([
     link: "pumas/concolor"
   }
 ])
-const items: DropdownMenuItem[] = [
-  {
-    label: 'Добавить пуму',
-    icon: 'i-lucide-plus',
-    click: () => console.log('Добавить кошку')
-  },
-  {
-    label: 'Изменить информацию о пуме',
-    icon: 'i-lucide-square-pen',
-    children: [
-      {
-        label: 'Поменять карточку',
-        icon: 'i-lucide-pen',
-        click: () => console.log('Поменять карточку')
-      },
-      {
-        label: 'Поменять описание',
-        icon: 'i-lucide-pen-line',
-        click: () => console.log('Поменять описание')
-      }
-    ]
-  }
-]
+
 </script>
 
 <style scoped>

@@ -3,6 +3,5 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   pages: true,
   compatibilityDate: "2025-03-16",
-  modules: ['@nuxt/content', '@nuxt/ui'],
-
+  modules: ['@nuxt/content'],
 })

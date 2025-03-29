@@ -10,6 +10,18 @@
       </label>
       <button @click="resetFilter">Сбросить фильтры</button>
     </div>
+
+    <div class="add-photos">
+      <button @click="showForm = true">Добавить новую фотографию</button>
+
+      <PhotoUploadForm
+          v-if="showForm"
+          class="upload-form-overlay"
+          @submit="handlePhotoSubmit"
+          @close="showForm = false"
+      />
+    </div>
+
     <div class="gallery-grid">
       <Carousel
           v-for="(photo, index) in filteredPhotos"
@@ -71,8 +83,6 @@ const myPhoto = reactive([
     description: "Пума",
     tags: ['puma'] // тег устанавливается здесь
   },
-
-
 ]);
 
 function resetFilter() {
@@ -98,9 +108,39 @@ const filteredPhotos = computed(() => {
     }
   });
 });
+
+
+const showForm = ref(false);
+
+const handlePhotoSubmit = async (formData) => {
+  try {
+    // Здесь логика сохранения данных
+    // Например, добавление в массив фотографий или отправка на сервер
+    console.log('Данные для сохранения:', formData);
+
+    // Закрываем форму после успешной отправки
+    showForm.value = false;
+
+  } catch (error) {
+    console.error('Ошибка сохранения:', error);
+  }
+};
 </script>
 
 <style scoped>
+
+.add-photos {
+  margin-bottom: 20px;
+}
+
+.upload-form-overlay {
+  position: fixed;
+  background-color: #E6E6E6;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .page-title {
   font-size: 3rem;
