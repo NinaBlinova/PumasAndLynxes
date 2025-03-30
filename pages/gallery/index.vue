@@ -37,14 +37,15 @@
 
 <script setup>
 import Carousel from "../components/Carousel.vue"
-import {reactive, computed} from "vue";
+import PhotoUploadForm from "../components/PhotoUploadForm.vue";
+import {ref, reactive, computed} from "vue";
 
 const filter = reactive({
   puma: false,
   lynx: false
 });
 
-const myPhoto = reactive([
+const myPhoto = ref([
   {
     imageName: "CanadianLynxPage2.png",
     caption: "Рысь",
@@ -92,39 +93,20 @@ function resetFilter() {
 
 const filteredPhotos = computed(() => {
   if (!filter.puma && !filter.lynx) {
-    return myPhoto;
+    return myPhoto.value;
   }
 
-  return myPhoto.filter(photo => {
+  return myPhoto.value.filter(photo => {
     const hasPuma = filter.puma && photo.tags.includes('puma');
     const hasLynx = filter.lynx && photo.tags.includes('lynx');
 
-    if (filter.puma && filter.lynx) {
-      return hasPuma || hasLynx;
-    } else if (filter.puma) {
-      return hasPuma;
-    } else {
-      return hasLynx;
-    }
+    return hasPuma || hasLynx;
   });
 });
 
 
 const showForm = ref(false);
 
-const handlePhotoSubmit = async (formData) => {
-  try {
-    // Здесь логика сохранения данных
-    // Например, добавление в массив фотографий или отправка на сервер
-    console.log('Данные для сохранения:', formData);
-
-    // Закрываем форму после успешной отправки
-    showForm.value = false;
-
-  } catch (error) {
-    console.error('Ошибка сохранения:', error);
-  }
-};
 </script>
 
 <style scoped>
@@ -134,7 +116,7 @@ const handlePhotoSubmit = async (formData) => {
 }
 
 .upload-form-overlay {
-  position: fixed;
+  position: absolute;
   background-color: #E6E6E6;
   z-index: 100;
   display: flex;

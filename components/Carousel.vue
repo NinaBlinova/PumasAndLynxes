@@ -25,9 +25,7 @@ const props = defineProps({
   }
 });
 
-const imageUrl = computed(() => {
-  return new URL(`/public/${props.imageName}`, import.meta.url).href;
-});
+const imageUrl = computed(() => props.imageName);
 
 const isPuma = computed(() => props.initialTags.includes('puma'));
 const isLynx = computed(() => props.initialTags.includes('lynx'));

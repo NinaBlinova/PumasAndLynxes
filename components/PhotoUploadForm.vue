@@ -10,26 +10,29 @@
             accept="image/*"
             @change="handleFileChange"
             required>
-        <img v-if="previewUrl" :src="previewUrl" class="preview-image">
+        <div class="preview-container">
+          <img v-if="previewUrl" :src="previewUrl" class="preview-image">
+          <div v-else class="preview-placeholder">Предпросмотр изображения</div>
+        </div>
       </div>
 
       <!-- Название фотографии -->
       <div class="form-group">
         <label for="title">Название:</label>
         <input style="width: 50vh"
-            type="text"
-            id="title"
-            v-model="formData.title"
-            required>
+               type="text"
+               id="title"
+               v-model="formData.title"
+               required>
       </div>
 
       <!-- Описание -->
       <div class="form-group">
         <label for="description">Описание:</label>
         <input style="width: 50vh"
-            type="text"
-            id="description"
-            v-model="formData.description">
+               type="text"
+               id="description"
+               v-model="formData.description">
         </input>
       </div>
 
@@ -78,39 +81,7 @@ const handleFileChange = (e) => {
   }
 };
 
-const handleSubmit = async () => {
-  isSubmitting.value = true;
 
-  try {
-    // Создаем FormData для отправки файла
-    const formPayload = new FormData();
-    formPayload.append('photo', formData.photo);
-    formPayload.append('title', formData.title);
-    formPayload.append('description', formData.description);
-    formData.tags.forEach(tag => formPayload.append('tags[]', tag));
-
-    // Здесь будет логика отправки на сервер
-    // Например:
-    // await $fetch('/api/upload', {
-    //   method: 'POST',
-    //   body: formPayload
-    // });
-
-    emit('submit', formData);
-
-    // Сброс формы после успешной отправки
-    formData.photo = null;
-    formData.title = '';
-    formData.description = '';
-    formData.tags = [];
-    previewUrl.value = '';
-
-  } catch (error) {
-    console.error('Ошибка загрузки:', error);
-  } finally {
-    isSubmitting.value = false;
-  }
-};
 </script>
 
 <style scoped>
@@ -120,6 +91,7 @@ const handleSubmit = async () => {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  flex-direction: column;
 }
 
 .form-group {
@@ -133,23 +105,19 @@ label {
 }
 
 input[type="text"],
-textarea,
 input[type="file"] {
   width: 100%;
   height: 20%;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-}
-
-textarea {
-  min-height: 100px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  padding: 10px;
 }
 
 .tags label {
@@ -159,11 +127,28 @@ textarea {
   font-weight: normal;
 }
 
+.preview-container {
+  width: 300px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 10px;
+  position: relative;
+}
+
 .preview-image {
   max-width: 100%;
-  max-height: 200px;
-  margin-top: 10px;
-  border-radius: 4px;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.preview-placeholder {
+  color: #999;
+  text-align: center;
+  padding: 20px;
 }
 
 button {
