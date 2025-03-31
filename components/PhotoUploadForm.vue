@@ -1,5 +1,6 @@
 <template>
   <div class="upload-form">
+    <button class="close-button" @click="handleClose">×</button>
     <form @submit.prevent="handleSubmit">
       <!-- Поле загрузки файла -->
       <div class="form-group">
@@ -61,7 +62,7 @@
 <script setup>
 const emit = defineEmits(['submit']);
 
-const availableTags = ['Пума', 'Рысь'];
+const availableTags = ['puma', 'lynx'];
 
 const formData = reactive({
   photo: null,
@@ -187,5 +188,20 @@ button {
 
 button:disabled {
   background-color: #cccccc;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #0a1454;
+}
+
+.close-button:hover {
+  color: #333;
 }
 </style>

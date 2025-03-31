@@ -38,53 +38,55 @@
 <script setup>
 import Carousel from "../components/Carousel.vue"
 import PhotoUploadForm from "../components/PhotoUploadForm.vue";
-import {ref, reactive, computed} from "vue";
+import {ref, reactive, computed } from "vue";
 
 const filter = reactive({
   puma: false,
   lynx: false
 });
 
-const myPhoto = ref([
-  {
-    imageName: "CanadianLynxPage2.png",
-    caption: "Рысь",
-    description: "Канадская рысь",
-    tags: ['lynx'] // тег устанавливается здесь
-  },
-  {
-    imageName: "PumaConcolorCostaricensisPageD.png",
-    caption: "Пума",
-    description: "Горная пума",
-    tags: ['puma'] // тег устанавливается здесь
-  },
-  {
-    imageName: "RedLynxPageD3.png",
-    caption: "Рысь",
-    description: "Красная рысь",
-    tags: ['lynx'] // тег устанавливается здесь
-  },
-  {
-    imageName: "EurasianLynxPageD3.png",
-    caption: "Рысь",
-    description: "Евразийская рысь",
-    tags: ['lynx'] // тег устанавливается здесь
-  },
 
-  {
-    imageName: "Puma1.png",
-    caption: "Пума",
-    description: "Пума",
-    tags: ['puma'] // тег устанавливается здесь
-  },
+const myPhoto = ref(
+    JSON.parse(localStorage.getItem("galleryPhotos")) || [
+      {
+        imageName: "CanadianLynxPage2.png",
+        caption: "Рысь",
+        description: "Канадская рысь",
+        tags: ['lynx'] // тег устанавливается здесь
+      },
+      {
+        imageName: "PumaConcolorCostaricensisPageD.png",
+        caption: "Пума",
+        description: "Горная пума",
+        tags: ['puma'] // тег устанавливается здесь
+      },
+      {
+        imageName: "RedLynxPageD3.png",
+        caption: "Рысь",
+        description: "Красная рысь",
+        tags: ['lynx'] // тег устанавливается здесь
+      },
+      {
+        imageName: "EurasianLynxPageD3.png",
+        caption: "Рысь",
+        description: "Евразийская рысь",
+        tags: ['lynx'] // тег устанавливается здесь
+      },
 
-  {
-    imageName: "Puma2.png",
-    caption: "Пума",
-    description: "Пума",
-    tags: ['puma'] // тег устанавливается здесь
-  },
-]);
+      {
+        imageName: "Puma1.png",
+        caption: "Пума",
+        description: "Пума",
+        tags: ['puma'] // тег устанавливается здесь
+      },
+
+      {
+        imageName: "Puma2.png",
+        caption: "Пума",
+        description: "Пума",
+        tags: ['puma'] // тег устанавливается здесь
+      },
+    ]);
 
 function resetFilter() {
   filter.puma = false;
@@ -106,12 +108,13 @@ const filteredPhotos = computed(() => {
 
 
 const handlePhotoSubmit = (newPhoto) => {
-  myPhoto.value.unshift(newPhoto); // Добавляем новое фото в начало массива
+  myPhoto.value.push(newPhoto);
   showForm.value = false;
+  console.log(myPhoto.value);
 };
 
-
 const showForm = ref(false);
+console.log(myPhoto.value);
 
 </script>
 
