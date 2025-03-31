@@ -38,7 +38,7 @@
 <script setup>
 import Carousel from "../components/Carousel.vue"
 import PhotoUploadForm from "../components/PhotoUploadForm.vue";
-import {ref, reactive, computed } from "vue";
+import {ref, reactive, computed} from "vue";
 
 const filter = reactive({
   puma: false,
@@ -46,8 +46,15 @@ const filter = reactive({
 });
 
 
-const myPhoto = ref(
-    JSON.parse(localStorage.getItem("galleryPhotos")) || [
+const myPhoto = ref([]);
+
+// Загружаем данные только в браузере
+onMounted(() => {
+  const savedPhotos = sessionStorage.getItem("galleryPhotos");
+  if (savedPhotos) {
+    myPhoto.value = JSON.parse(savedPhotos);
+  } else {
+    myPhoto.value = [
       {
         imageName: "CanadianLynxPage2.png",
         caption: "Рысь",
@@ -85,8 +92,11 @@ const myPhoto = ref(
         caption: "Пума",
         description: "Пума",
         tags: ['puma'] // тег устанавливается здесь
-      },
-    ]);
+      }
+    ];
+  }
+});
+
 
 function resetFilter() {
   filter.puma = false;
@@ -109,12 +119,11 @@ const filteredPhotos = computed(() => {
 
 const handlePhotoSubmit = (newPhoto) => {
   myPhoto.value.push(newPhoto);
+  sessionStorage.setItem("galleryPhotos", JSON.stringify(myPhoto.value));
   showForm.value = false;
-  console.log(myPhoto.value);
 };
 
 const showForm = ref(false);
-console.log(myPhoto.value);
 
 </script>
 
