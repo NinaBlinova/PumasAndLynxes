@@ -81,6 +81,32 @@ const handleFileChange = (e) => {
   }
 };
 
+const handleSubmit = () => {
+  isSubmitting.value = true;
+
+  // Создаем объект для новой фотографии
+  const newPhoto = {
+    imageName: previewUrl.value, // Используем URL превью как временный источник
+    caption: formData.title,
+    description: formData.description,
+    tags: formData.tags.map(tag => tag.toLowerCase()) // Приводим теги к нижнему регистру
+  };
+
+  emit('submit', newPhoto);
+
+  // Сброс формы
+  formData.photo = null;
+  formData.title = '';
+  formData.description = '';
+  formData.tags = [];
+  previewUrl.value = '';
+  isSubmitting.value = false;
+};
+
+const handleClose = () => {
+  emit('close');
+};
+
 
 </script>
 

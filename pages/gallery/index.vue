@@ -105,6 +105,12 @@ const filteredPhotos = computed(() => {
 });
 
 
+const handlePhotoSubmit = (newPhoto) => {
+  myPhoto.value.unshift(newPhoto); // Добавляем новое фото в начало массива
+  showForm.value = false;
+};
+
+
 const showForm = ref(false);
 
 </script>

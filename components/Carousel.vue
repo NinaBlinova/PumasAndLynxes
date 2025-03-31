@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import {computed} from 'vue';
 
 const props = defineProps({
   imageName: String,
@@ -25,7 +25,14 @@ const props = defineProps({
   }
 });
 
-const imageUrl = computed(() => props.imageName);
+const imageUrl = computed(() => {
+  // Если это объект File (новое загруженное фото)
+  if (props.imageName instanceof File || props.imageName instanceof Blob) {
+    return URL.createObjectURL(props.imageName);
+  }
+  // Иначе считаем, что это имя файла из public
+  return props.imageName;
+});
 
 const isPuma = computed(() => props.initialTags.includes('puma'));
 const isLynx = computed(() => props.initialTags.includes('lynx'));
