@@ -17,13 +17,6 @@
     </div>
   </div>
 
-  <hr>
-  <div class="change-info">
-    <h1>Изменить информацию</h1>
-
-  </div>
-  <hr>
-
 </template>
 
 <script setup lang="ts">

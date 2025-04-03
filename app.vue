@@ -25,7 +25,11 @@
 
     <!-- Main content -->
     <main class="main-content">
-      <NuxtPage />
+      <NuxtLayout>
+        <transition name="page">
+          <NuxtPage />
+        </transition>
+      </NuxtLayout>
     </main>
 
     <!-- Footer -->
@@ -138,5 +142,13 @@ nav ul li a {
 /* Main Content */
 .main-content {
   flex: 1; /* This ensures the content grows and takes up available space */
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.page-enter-from, .page-leave-to {
+  opacity: 0;
 }
 </style>
