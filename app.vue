@@ -24,7 +24,7 @@
     </header>
 
     <!-- Main content -->
-    <main class="main-content">
+    <main class="main-content" >
       <NuxtLayout>
         <transition name="page">
           <NuxtPage />

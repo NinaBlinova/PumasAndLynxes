@@ -10,15 +10,15 @@
 
     <div class="animal-header"><h1>{{ puma.caption }}</h1></div>
     <div class="animal-grid">
-      <div class="animal-image">
+      <div class="animal-image fade-in">
         <img :src="`/${puma.imageName}`" v-if="puma.imageName" :alt="puma.caption" class="my-img"/>
       </div>
 
-      <div class="animal-description">
+      <div class="animal-description fade-in">
         <p>{{ puma.description }}</p>
       </div>
 
-      <div class="animal-facts">
+      <div class="animal-facts fade-in">
         <h2>Интересные факты</h2>
         <ul>
           <li>{{ puma.fact1 }}</li>
@@ -29,7 +29,7 @@
         </ul>
       </div>
 
-      <div>
+      <div class="fade-in">
         <img :src="`/${puma.imgName2}`" v-if="puma.imgName2" :alt="puma.caption" class="my-img"/>
       </div>
     </div>
@@ -48,7 +48,23 @@ const puma = await queryCollection('pumas')
     .where('slug', '=', route.params.id)
     .first();
 
-console.log('Загруженные данные:', puma)
+//console.log('Загруженные данные:', puma)
+
+// Анимация появления при прокрутке
+const handleScrollAnimation = () => {
+  const elements = document.querySelectorAll('.fade-in');
+  elements.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.9) {
+      el.classList.add('visible');
+    }
+  });
+};
+
+onMounted(() => {
+  document.addEventListener('scroll', handleScrollAnimation);
+  handleScrollAnimation();
+});
 </script>
 
 <style scoped>
@@ -173,5 +189,17 @@ console.log('Загруженные данные:', puma)
   border-radius: 10px; /* Скругляем углы */
   box-sizing: border-box; /* Учитываем padding в размерах */
   margin-bottom: 3vw; /* Добавляем отступ снизу, чтобы подвал не упирался в элемент */
+}
+
+/* Анимация плавного появления */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
