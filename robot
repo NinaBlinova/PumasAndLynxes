@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /private/
-Disallow: /tmp/
-Disallow: /admin/
+Disallow: /components/
+Disallow: /content/
