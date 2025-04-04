@@ -5,7 +5,7 @@
       <div class="icon">
         <img src="/public/logo.png" alt="logo">
       </div>
-      <img class="lynx" src="/public/lynxesHome.png" alt="Lynx"/>
+      <img class="lynx" src="/public/lynxesHome.png" alt="Рысь"/>
     </div>
 
     <div class="content">
@@ -23,9 +23,9 @@
         </ul>
         <p>🌍 <strong>Исследуйте: фотогалерею потрясающих снимков этих великолепных животных.</strong></p>
       </div>
-      <img class="puma" src="/public/pumasHome.png" alt="Puma"/>
+      <img class="puma" src="/public/pumasHome.png" alt="Пума"/>
       <div class="map">bla bla</div>
-      <NuxtLink to="/gallery">
+      <NuxtLink aria-label="Перейти в галерею фотографий" to="/gallery">
         <button class="more-btn">More</button>
       </NuxtLink>
 
@@ -68,6 +68,53 @@ const myCats = reactive([
   }
 ])
 
+
+// SEO метаданные
+import {useRoute} from "vue-router";
+
+const route = useRoute();
+
+useSeoMeta({
+  title: "Пумы и Рыси — Исследования диких кошек",
+  description: "Научные статьи, фотогалерея и карты ареалов обитания пум и рысей.",
+  ogTitle: "Исследуйте мир диких кошек.",
+  ogDescription: "Эксклюзивные фото и видео пум в естественной среде обитания.",
+  ogImage: "https://pumas-and-lynxes.com/images/social-preview.jpg",
+  ogUrl: `https://pumas-and-lynxes.com${route.path}`,
+  ogType: "website",
+  ogLocale: "ru_RU",
+  canonical: `https://ваш-сайт.com${route.path}`
+});
+
+
+import {useHead} from "#imports";
+
+useHead({
+  meta: [
+    {name: 'keywords', content: 'пумы, рыси, дикие кошки, животные'}
+  ],
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Пумы и Рыси",
+        "url": "https://pumas-and-lynxes.com",
+        "description": "Научные статьи, фотогалерея и карты ареалов обитания пум и рысей.",
+        "image": "https://pumas-and-lynxes.com/images/social-preview.jpg",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Pumas & Lynxes Research",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://pumas-and-lynxes.com/images/logo.png"
+          }
+        }
+      })
+    }
+  ]
+});
 </script>
 
 <style scoped>

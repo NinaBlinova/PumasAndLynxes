@@ -47,6 +47,36 @@ const myCats = reactive([
   }
 ])
 
+
+import {useSeoMeta, useHead} from "#imports";
+import {useRoute} from "vue-router";
+
+const route = useRoute();
+
+useSeoMeta({
+  title: "Пумы — виды, среда обитания, интересные факты",
+  description: "Все о пумах: восточная, коста-риканская и южноамериканская пума. Описание, ареал, образ жизни.",
+
+  // OpenGraph
+  ogTitle: "Пумы — узнайте больше о больших кошках",
+  ogDescription: "Восточная, коста-риканская и южноамериканская пумы. Их особенности, ареал и интересные факты.",
+  ogImage: "https://pumasHomeCard.png",
+  ogUrl: "https://pumas-and-lynxes.com" + route.path,
+  ogType: "website",
+  ogLocale: "ru_RU",
+});
+
+
+useHead({
+  link: [
+    { rel: "canonical", href: "https://pumas-and-lynxes.com" + route.path }
+  ],
+  meta: [
+    { name: "keywords",
+      content: "пумы, восточная пума, коста-риканская пума, южноамериканская пума, дикие кошки, большие кошки" }
+  ]
+});
+
 </script>
 
 <style scoped>

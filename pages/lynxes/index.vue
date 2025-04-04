@@ -51,6 +51,37 @@ const myCats = reactive([
     link: "lynxes/red-lynx"
   }
 ])
+
+
+import {useSeoMeta, useHead} from "#imports";
+import {useRoute} from "vue-router";
+
+const route = useRoute();
+
+useSeoMeta({
+  title: "Всё о рысях — виды, среда обитания, интересные факты",
+  description: "Узнайте всё о рысях: евразийская, канадская, иберийская и красная рысь. Описание, ареал, образ жизни.",
+
+  // OpenGraph
+  ogTitle: "Рыси — узнайте больше о диких кошках",
+  ogDescription: "Изучите виды рысей: их особенности, повадки и среду обитания.",
+  ogImage: "https://lunxesHomeCard.png",
+  ogUrl: "https://pumas-and-lynxes.com" + route.path,
+  ogType: "website",
+  ogLocale: "ru_RU",
+
+  // Canonical URL
+  canonical: "https://pumas-and-lynxes.com" + route.path
+});
+
+useHead({
+  meta: [
+    {
+      name: "keywords",
+      content: "рыси, евразийская рысь, канадская рысь, иберийская рысь, красная рысь, дикие кошки"
+    }
+  ]
+});
 </script>
 
 <style scoped>
