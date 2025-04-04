@@ -73,3 +73,5 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+Habitat data sourced from [IUCN Red List](https://www.iucnredlist.org/), version 2023-1.  
