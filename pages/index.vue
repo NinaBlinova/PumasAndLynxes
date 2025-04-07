@@ -24,7 +24,6 @@
         <p>🌍 <strong>Исследуйте: фотогалерею потрясающих снимков этих великолепных животных.</strong></p>
       </div>
       <img class="puma" src="/public/pumasHome.png" alt="Пума"/>
-      <div class="map">bla bla</div>
       <NuxtLink aria-label="Перейти в галерею фотографий" to="/gallery">
         <button class="more-btn">More</button>
       </NuxtLink>
@@ -38,8 +37,10 @@
           :key="index" :imageName="c.imageName" :caption="c.caption" :description="c.description" :link="c.link"/>
   </div>
 
-  <div class="map2"> bla bla</div>
-
+  <div class="map2">
+    <NuxtLink aria-label="Перейти к карте" to="/map"><img src="/public/map.png"
+                                                                    alt="карта на главной странице"/></NuxtLink>
+  </div>
 
 </template>
 
@@ -224,17 +225,6 @@ useHead({
   background-color: #ffb600;
 }
 
-.map {
-  width: 50%; /* Ширина карты */
-  height: auto; /* Высота карты */
-  background: blue;
-  position: absolute; /* Убираем абсолютное позиционирование */
-  left: 8%;
-  bottom: 0;
-  font-size: 1.5vw;
-  border-radius: 10px;
-}
-
 .cardsHomeCats {
   display: flex;
   justify-content: space-between; /* распределение карточек по всей ширине */
@@ -246,7 +236,6 @@ useHead({
 .map2 {
   width: 60%; /* Задаем ширину 60% от экрана */
   height: auto; /* Высота карты будет адаптироваться */
-  background: #ccc; /* Примерный фон для карты */
   margin-top: 7%;
   margin-left: auto;
   margin-right: auto;
@@ -254,6 +243,12 @@ useHead({
   border-radius: 10px; /* Скругляем углы */
   box-sizing: border-box; /* Учитываем padding в размерах */
   margin-bottom: 3vw; /* Добавляем отступ снизу, чтобы подвал не упирался в элемент */
+}
+
+.map2 img {
+  width: 100%; /* Картинка растягивается на всю ширину контейнера */
+  height: 100%; /* Картинка растягивается на всю высоту контейнера */
+  object-fit: cover; /* Обеспечивает сохранение пропорций картинки, при этом она полностью заполняет контейнер */
 }
 
 

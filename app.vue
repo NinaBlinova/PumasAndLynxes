@@ -17,7 +17,7 @@
             <NuxtLink to="/gallery">Gallery</NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/map/map">Map</NuxtLink>
+            <NuxtLink to="/map">Map</NuxtLink>
           </li>
         </ul>
       </nav>

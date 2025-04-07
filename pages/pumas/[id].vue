@@ -34,9 +34,6 @@
       </div>
     </div>
   </div>
-
-
-  <div class="map2"> bla bla</div>
 </template>
 
 <script setup>

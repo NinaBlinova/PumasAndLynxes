@@ -173,11 +173,23 @@ onMounted(async () => {
     }
   })
 })
+
+import Map from '~/components/Map.vue'; // импортируем компонент
+
+const popupData = ref({
+  photo: '',
+  species: '',
+  subspecies: '',
+  population: ''
+});
+
+
+
 </script>
 
 <template>
   <div>
-    <h1>Ареалы обитания рыси</h1>
+    <h1>Ареалы обитания рыси и пумы</h1>
     <div
         ref="mapElement"
         style="width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px;"
