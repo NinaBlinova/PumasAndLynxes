@@ -26,6 +26,14 @@ onMounted(async () => {
   const responseIberian = await fetch('/data/iberian_lynx.json')
   const iberianLynxRangeGeoJSON = await responseIberian.json()
 
+  // ✅ Загружаем GeoJSON для ареала канадской рыси
+  const responseCanadian = await fetch('/data/canadian_lynx.json')
+  const canadianLynxRangeGeoJSON = await responseCanadian.json()
+
+  // ✅ Загружаем GeoJSON для ареала пум
+  const responsePumas = await fetch('/data/puma.json')
+  const pumasRangeGeoJSON = await responsePumas.json()
+
   // ✅ Стиль для ареала европейской рыси
   const rangeStyleEurasian = new Style({
     fill: new Fill({
@@ -48,6 +56,28 @@ onMounted(async () => {
     })
   })
 
+  // ✅ Стиль для ареала канадской рыси
+  const rangeStyleCanadian = new Style({
+    fill: new Fill({
+      color: 'rgba(208,0,255,0.5)' // пурпурный цвет для канадской рыси
+    }),
+    stroke: new Stroke({
+      color: 'rgba(208,0,255,0.5)',
+      width: 2
+    })
+  })
+
+  // ✅ Стиль для ареала пум
+  const rangeStylePuma = new Style({
+    fill: new Fill({
+      color: 'rgba(123,255,0,0.5)' // зеленый цвет для пум
+    }),
+    stroke: new Stroke({
+      color: 'rgba(123,255,0,0.5)',
+      width: 2
+    })
+  })
+
   // ✅ Чтение GeoJSON для европейской рыси
   const vectorSourceEurasian = new VectorSource({
     features: new GeoJSON().readFeatures(eurasionLynxRangeGeoJSON, {
@@ -62,7 +92,21 @@ onMounted(async () => {
     })
   })
 
-  // ✅ Создаем слои для обоих ареалов
+  // ✅ Чтение GeoJSON для канадской рыси
+  const vectorSourceCanadian = new VectorSource({
+    features: new GeoJSON().readFeatures(canadianLynxRangeGeoJSON, {
+      featureProjection: 'EPSG:3857' // для корректного отображения на карте
+    })
+  })
+
+  // ✅ Чтение GeoJSON для пум
+  const vectorSourcePuma = new VectorSource({
+    features: new GeoJSON().readFeatures(pumasRangeGeoJSON, {
+      featureProjection: 'EPSG:3857' // для корректного отображения на карте
+    })
+  })
+
+  // ✅ Создаем слои для ареалов
   const vectorLayerEurasian = new VectorLayer({
     source: vectorSourceEurasian,
     style: rangeStyleEurasian
@@ -73,6 +117,16 @@ onMounted(async () => {
     style: rangeStyleIberian
   })
 
+  const vectorLayerCanadian = new VectorLayer({
+    source: vectorSourceCanadian,
+    style: rangeStyleCanadian
+  })
+
+  const vectorLayerPuma = new VectorLayer({
+    source: vectorSourcePuma,
+    style: rangeStylePuma
+  })
+
   // ✅ Карта
   const map = new Map({
     target: mapElement.value!,
@@ -81,7 +135,9 @@ onMounted(async () => {
         source: new OSM()
       }),
       vectorLayerEurasian, // Слой для европейской рыси
-      vectorLayerIberian   // Слой для иберийской рыси
+      vectorLayerIberian,   // Слой для иберийской рыси
+      vectorLayerCanadian, // Слой для канадской рыси
+      vectorLayerPuma // Слой для пумы
     ],
     view: new View({
       center: [0, 0], // можно заменить позже
@@ -136,12 +192,20 @@ onMounted(async () => {
         <span class="legend-color" style="background-color: rgba(0, 123, 255, 0.5);"></span>
         <span>Ареал иберийской рыси</span>
       </div>
+      <div class="legend-item">
+        <span class="legend-color" style="background-color: rgba(208,0,255,0.5);"></span>
+        <span>Ареал канадской рыси</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color" style="background-color: rgba(123,255,0,0.5);"></span>
+        <span>Ареал пум</span>
+      </div>
     </div>
 
     <div
         ref="popupElement"
         style="display: none; background: white; padding: 5px 10px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); position: absolute;"
-    ></div>
+    </div>
   </div>
 </template>
 
