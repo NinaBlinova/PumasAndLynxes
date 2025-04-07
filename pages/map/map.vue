@@ -202,7 +202,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div
+    <div>
         ref="popupElement"
         style="display: none; background: white; padding: 5px 10px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); position: absolute;"
     </div>
