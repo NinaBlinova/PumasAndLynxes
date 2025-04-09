@@ -1,110 +1,59 @@
 <template>
-  <div v-if="isVisible" class="legend-popup">
-    <div class="legend-content">
-      <button @click="closePopup" class="close-btn">X</button>
-      <img :src="animalPhoto" alt="Animal photo" class="animal-photo" />
-      <div class="animal-info">
-        <h3>{{ species }}</h3>
-        <p><strong>Подвид:</strong> {{ subspecies }}</p>
-        <p><strong>Численность:</strong> {{ population }}</p>
-      </div>
+  <div class="popup-card">
+    <img :src="photo" :alt="species" class="popup-image" />
+    <div class="popup-content">
+      <h3 class="popup-title">{{ species }}</h3>
+      <p class="popup-subspecies">{{ subspecies }}</p>
+      <p class="popup-population">Популяция: {{ population || 'Неизвестно' }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
-// Пропсы для передачи данных
 const props = defineProps({
-  animalPhoto: {
-    type: String,
-    required: true
-  },
-  species: {
-    type: String,
-    required: true
-  },
-  subspecies: {
-    type: String,
-    required: true
-  },
-  population: {
-    type: String,
-    required: true
-  }
+  photo: String,
+  species: String,
+  subspecies: String,
+  population: [String, Number]
 });
-
-// Логика видимости попапа
-const isVisible = ref(false);
-
-// Функция для открытия попапа
-const openPopup = () => {
-  isVisible.value = true;
-};
-
-// Функция для закрытия попапа
-const closePopup = () => {
-  isVisible.value = false;
-};
-
-// Внешняя функция для вызова открытия (можно будет вызвать из другого компонента)
-const triggerPopup = (data) => {
-  animalPhoto.value = data.photo;
-  species.value = data.species;
-  subspecies.value = data.subspecies;
-  population.value = data.population;
-  openPopup();
-};
 </script>
 
 <style scoped>
-.legend-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.9);
+.popup-card {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  max-width: 300px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-family: 'Arial', sans-serif;
+}
+
+.popup-image {
   width: 100%;
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
+  height: 130px;
+  object-fit: cover;
 }
 
-.legend-content {
-  text-align: center;
+.popup-content {
+  padding: 10px;
 }
 
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
+.popup-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.animal-photo {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 10px;
+.popup-subspecies {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
 }
 
-.animal-info {
-  text-align: left;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.popup-population {
+  font-size: 0.85rem;
+  color: #333;
 }
 </style>

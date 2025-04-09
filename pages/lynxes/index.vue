@@ -85,7 +85,6 @@ useHead({
 </script>
 
 <style scoped>
-
 .logo-container {
   position: absolute;
   top: 20px;

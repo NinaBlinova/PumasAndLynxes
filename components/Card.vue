@@ -23,6 +23,14 @@ const imageUrl = computed(() => {
 </script>
 
 <style scoped>
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Arial', sans-serif;
+}
+
 .card {
   margin-left: 20px; /* Фиксированный отступ */
   margin-top: 30px; /* Фиксированный отступ */

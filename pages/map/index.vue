@@ -126,7 +126,7 @@ onMounted(async () => {
     source: vectorSourcePuma,
     style: rangeStylePuma
   })
-
+//интерактивная зоологическая выставка для курсовой работы
   // ✅ Карта
   const map = new Map({
     target: mapElement.value!,
@@ -165,7 +165,12 @@ onMounted(async () => {
 
     if (feature && element) {
       const properties = feature.getProperties()
-      element.innerHTML = ` <strong>${properties.name || 'Неизвестная область'}</strong><br> Вид: ${properties.species || 'Не указано'}<br> Численность: ${properties.population ?? 'Неизвестно'}`
+      const name = properties.name || 'Неизвестная область'
+      const species = properties.species || 'Не указано'
+      const population = properties.population ?? 'Неизвестно'
+      const photo = properties.photo || '' // путь к фото
+
+      element.innerHTML = `\n      <div class="Elements">\n        <strong>${name}</strong><br>\n        Вид: ${species}<br>\n        Численность: ${population}<br>\n        ${photo ? `<img src="${photo}" alt="${species}" style="max-width: 100%">` : ''}\n      </div>\n    `
       popup.setPosition(e.coordinate)
       element.style.display = 'block'
     } else if (element) {
@@ -173,18 +178,6 @@ onMounted(async () => {
     }
   })
 })
-
-import Map from '~/components/Map.vue'; // импортируем компонент
-
-const popupData = ref({
-  photo: '',
-  species: '',
-  subspecies: '',
-  population: ''
-});
-
-
-
 </script>
 
 <template>
@@ -192,7 +185,7 @@ const popupData = ref({
     <h1>Ареалы обитания рыси и пумы</h1>
     <div
         ref="mapElement"
-        style="width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px;"
+        style="width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 8px;"
     ></div>
 
     <div class="legend">
@@ -216,37 +209,71 @@ const popupData = ref({
 
     <div
         ref="popupElement"
-        style="display: none; background: white; padding: 5px 10px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); position: absolute;">
+        class="Elements">
     </div>
   </div>
 </template>
 
 <style scoped>
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Arial', sans-serif;
+}
+
 h1 {
   color: #333;
   margin-bottom: 20px;
+  text-align: center;
+  font-size: 2rem;
 }
 
 .legend {
-  padding: 10px;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  padding: 12px;
   background: white;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
-  display: inline-block;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  margin: 5px 0;
+  margin: 0;
 }
 
 .legend-color {
   display: inline-block;
   width: 20px;
   height: 20px;
-  margin-right: 10px;
+  margin-right: 8px;
   border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.card-content h3 {
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+}
+
+.card-meta span {
+  background: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.Elements {
+  display: none;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 250px; /* Ограничим размер попапа */
 }
 </style>

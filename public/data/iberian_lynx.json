@@ -2,6 +2,7 @@
   "type": "Feature",
   "properties": {
     "name": "Aреал",
+    "photo": "SpanishLynxPageD.png",
     "species": "Испанская (иберийская) рысь",
     "population": "Общая численность более 2 тысяч особей"
   },

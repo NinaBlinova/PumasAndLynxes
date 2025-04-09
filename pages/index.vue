@@ -39,7 +39,7 @@
 
   <div class="map2">
     <NuxtLink aria-label="Перейти к карте" to="/map"><img src="/public/map.png"
-                                                                    alt="карта на главной странице"/></NuxtLink>
+                                                          alt="карта на главной странице"/></NuxtLink>
   </div>
 
 </template>
@@ -62,7 +62,7 @@ const myCats = reactive([
   {
     imageName: "lynxesHomeCard.png",
     caption: "Рыси",
-    description: "загадочное и грациозное животное, принадлежащее к " +
+    description: "Загадочное и грациозное животное, принадлежащее к " +
         "семейству кошачьих. Эти хищники обитают в лесах и горных районах Европы, Азии и Северной Америки. " +
         "Рыси известны своим уникальным внешним видом, включая характерные кисточки на ушах и короткий хвост.",
     link: "lynxes"
@@ -119,6 +119,14 @@ useHead({
 </script>
 
 <style scoped>
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Arial', sans-serif;
+}
+
 .banner {
   margin-top: 1.5%;
   background: #FFC943;

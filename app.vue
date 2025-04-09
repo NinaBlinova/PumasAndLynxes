@@ -24,10 +24,10 @@
     </header>
 
     <!-- Main content -->
-    <main class="main-content" >
+    <main class="main-content">
       <NuxtLayout>
         <transition name="page">
-          <NuxtPage />
+          <NuxtPage/>
         </transition>
       </NuxtLayout>
     </main>
@@ -56,6 +56,7 @@ const toggleMenu = () => {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: 'Arial', sans-serif;
   background-color: #FFFBF0;
 }
 
@@ -115,6 +116,7 @@ nav ul li a {
 
 .footer {
   background-color: #FFC943;
+  font-family: 'Arial', sans-serif;
   padding: 20px;
   text-align: center;
   margin-top: auto; /* Это автоматически отправляет футер в низ */
