@@ -175,19 +175,6 @@ onMounted(() => {
   }
 }
 
-.map2 {
-  width: 90%; /* Задаем ширину 60% от экрана */
-  height: auto; /* Высота карты будет адаптироваться */
-  background: #ccc; /* Примерный фон для карты */
-  margin-top: 3%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 5vw; /* Добавляем отступы внутри карты */
-  border-radius: 10px; /* Скругляем углы */
-  box-sizing: border-box; /* Учитываем padding в размерах */
-  margin-bottom: 3vw; /* Добавляем отступ снизу, чтобы подвал не упирался в элемент */
-}
-
 /* Анимация плавного появления */
 .fade-in {
   opacity: 0;

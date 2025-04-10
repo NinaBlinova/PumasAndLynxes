@@ -15,7 +15,7 @@ onMounted(async () => {
   const {default: VectorSource} = await import('ol/source/Vector')
   const {default: Style} = await import('ol/style/Style')
   const {default: Fill} = await import('ol/style/Fill')
-  const {default: Stroke} = await import('ol/style/Stroke')
+  const {default: Stroke} = await  import('ol/style/Stroke')
   const {default: Overlay} = await import('ol/Overlay')
 
   // ✅ Загружаем GeoJSON для ареала европейской рыси
@@ -215,17 +215,9 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-body {
-  font-family: 'Arial', sans-serif;
-}
-
-h1, h2, h3, h4 {
-  font-family: 'Arial', sans-serif;
-}
-
 h1 {
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   text-align: center;
   font-size: 2rem;
 }
@@ -233,13 +225,13 @@ h1 {
 .legend {
   margin-top: 2.5%;
   margin-bottom: 2.5%;
-  padding: 12px;
+  padding: 0.75rem;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .legend-item {
@@ -250,30 +242,19 @@ h1 {
 
 .legend-color {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  border: 1px solid #333;
-  border-radius: 4px;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  border: 0.01rem solid #333;
+  border-radius: 0.5rem;
 }
 
-.card-content h3 {
-  margin: 0 0 8px 0;
-  color: #2c3e50;
-  font-size: 1.3rem;
-}
-
-.card-meta span {
-  background: #f0f0f0;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
 .Elements {
   display: none;
   background: white;
-  padding: 5px 10px;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 250px; /* Ограничим размер попапа */
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.2);
+  max-width: 16rem;
 }
 </style>
