@@ -23,7 +23,7 @@
         </ul>
         <p>🌍 <strong>Исследуйте: фотогалерею потрясающих снимков этих великолепных животных.</strong></p>
       </div>
-      <img class="puma" src="/public/pumasHome.png" alt="Пума"/>
+      <img class="puma" src="/public/pumasHome.png" alt="Пума" />
       <NuxtLink aria-label="Перейти в галерею фотографий" to="/gallery">
         <button class="more-btn">More</button>
       </NuxtLink>
@@ -84,7 +84,7 @@ useSeoMeta({
   ogUrl: `https://pumas-and-lynxes.com${route.path}`,
   ogType: "website",
   ogLocale: "ru_RU",
-  canonical: `https://ваш-сайт.com${route.path}`
+  canonical: `https://pumas-and-lynxes.com${route.path}`
 });
 
 
