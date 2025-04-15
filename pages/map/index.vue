@@ -15,7 +15,7 @@ onMounted(async () => {
   const {default: VectorSource} = await import('ol/source/Vector')
   const {default: Style} = await import('ol/style/Style')
   const {default: Fill} = await import('ol/style/Fill')
-  const {default: Stroke} = await  import('ol/style/Stroke')
+  const {default: Stroke} = await import('ol/style/Stroke')
   const {default: Overlay} = await import('ol/Overlay')
 
   // ✅ Загружаем GeoJSON для ареала европейской рыси
@@ -88,6 +88,7 @@ onMounted(async () => {
   // ✅ Чтение GeoJSON для иберийской рыси
   const vectorSourceIberian = new VectorSource({
     features: new GeoJSON().readFeatures(iberianLynxRangeGeoJSON, {
+      // EPSG:3857 — это система координат, используемая для веб-картографии
       featureProjection: 'EPSG:3857' // для корректного отображения на карте
     })
   })
@@ -151,29 +152,39 @@ onMounted(async () => {
     duration: 1000
   })
 
-  // ✅ Попап
+  // ✅ Попап (всплывающее окно)
   const popup = new Overlay({
-    element: popupElement.value!,
+    element: popupElement.value!, // HTML-элемент попапа (передаем через ref)
     positioning: 'bottom-center',
-    stopEvent: false
+    stopEvent: false // Позволяет событиям мыши "проходить сквозь" попап к карте
   })
+  // Добавляем созданный попап на карту
   map.addOverlay(popup)
 
+  // Обрабатываем движение курсора мыши по карте
   map.on('pointermove', (e) => {
     const feature = map.forEachFeatureAtPixel(e.pixel, (f) => f)
     const element = popup.getElement()
 
     if (feature && element) {
+      // Получаем свойства объекта
       const properties = feature.getProperties()
+
+      // Извлекаем данные с подстановкой значений по умолчанию
       const name = properties.name || 'Неизвестная область'
       const species = properties.species || 'Не указано'
       const population = properties.population ?? 'Неизвестно'
       const photo = properties.photo || '' // путь к фото
 
+      // Формируем HTML-содержимое попапа
       element.innerHTML = `\n      <div class="Elements">\n        <strong>${name}</strong><br>\n        Вид: ${species}<br>\n        Численность: ${population}<br>\n        ${photo ? `<img src="${photo}" alt="${species}" style="max-width: 100%">` : ''}\n      </div>\n    `
+
+      // Позиционируем попап в координатах курсора
       popup.setPosition(e.coordinate)
+
+      // Показываем попап
       element.style.display = 'block'
-    } else if (element) {
+    } else if (element) { // Если объекта под курсором нет, но попап существует
       element.style.display = 'none'
     }
   })
@@ -241,6 +252,7 @@ h1 {
 }
 
 .legend-color {
+  /* элемент отображается как строчный, но его содержимое может быть отформатировано как блок */
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;

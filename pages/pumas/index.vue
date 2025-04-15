@@ -84,7 +84,6 @@ useHead({
   position: absolute;
   top: 20px;
   left: 20px;
-  z-index: 100;
 }
 
 .logo {
@@ -107,20 +106,6 @@ useHead({
 
 .header {
   margin-bottom: 3rem;
-}
-
-.change-info {
-  margin-bottom: 0.5vh;
-  text-align: center;
-}
-
-.change-info h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
 }
 
 .page-title {

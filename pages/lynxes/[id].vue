@@ -72,7 +72,6 @@ onMounted(() => {
   position: absolute;
   top: 20px;
   left: 20px;
-  z-index: 100;
 }
 
 .logo {

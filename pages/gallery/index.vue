@@ -136,7 +136,6 @@ const showForm = ref(false);
 .upload-form-overlay {
   position: absolute;
   background-color: #E6E6E6;
-  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
