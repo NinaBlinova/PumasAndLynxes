@@ -23,13 +23,6 @@ const imageUrl = computed(() => {
 </script>
 
 <style scoped>
-body {
-  font-family: 'Arial', sans-serif;
-}
-
-h1, h2, h3, h4 {
-  font-family: 'Arial', sans-serif;
-}
 
 .card {
   margin-left: 20px; /* Фиксированный отступ */
@@ -51,7 +44,7 @@ h1, h2, h3, h4 {
 
 .card-title {
   font-size: 1.5rem; /* Фиксированный размер */
-  margin: 10px 0; /* Фиксированные отступы */
+  margin: 10px 0; /* Фиксированные отступы : первое значение применится для верхнего и нижнего отступа, а второе — для левого и правого*/
 }
 
 .card-description {
@@ -79,6 +72,7 @@ h1, h2, h3, h4 {
 
 .nuxt-link {
   text-decoration: none;
+  /*  элемент наследует значение свойства color от своего родительского элемента */
   color: inherit;
 }
 

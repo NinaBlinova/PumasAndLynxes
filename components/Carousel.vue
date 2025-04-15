@@ -35,6 +35,7 @@ const isLynx = computed(() => props.initialTags.includes('lynx'));
 .photo-frame {
   border: 1px solid #ddd;
   border-radius: 8px;
+  /* содержимое, выходящее за пределы «родительского» блока, обрезается по его границам без прокрутки */
   overflow: hidden;
   display: flex;
   flex-direction: column;

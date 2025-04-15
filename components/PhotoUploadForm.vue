@@ -1,25 +1,46 @@
 <template>
+  <!-- Основной контейнер формы загрузки -->
   <div class="upload-form">
+    <!-- Кнопка закрытия формы (крестик) -->
     <button class="close-button" @click="handleClose">×</button>
+
+    <!-- Форма с обработкой submit (prevent предотвращает перезагрузку страницы) -->
     <form @submit.prevent="handleSubmit">
-      <!-- Поле загрузки файла -->
+
+      <!-- ===== Секция загрузки файла ===== -->
       <div class="form-group">
+        <!-- Лейбл для поля загрузки -->
         <label for="photo">Фотография:</label>
+
+        <!-- Поле ввода файла:
+             - accept="image/*" ограничивает выбор только изображениями
+             - required делает поле обязательным
+             - @change обрабатывает выбор файла -->
         <input
             type="file"
             id="photo"
             accept="image/*"
             @change="handleFileChange"
             required>
+
+        <!-- Контейнер для предпросмотра изображения -->
         <div class="preview-container">
+          <!-- Показываем изображение, если есть previewUrl -->
           <img v-if="previewUrl" :src="previewUrl" class="preview-image">
+
+          <!-- Плейсхолдер, если изображение не выбрано -->
           <div v-else class="preview-placeholder">Предпросмотр изображения</div>
         </div>
       </div>
 
-      <!-- Название фотографии -->
+      <!-- ===== Поле для названия фотографии ===== -->
       <div class="form-group">
         <label for="title">Название:</label>
+
+        <!-- Текстовое поле:
+             - v-model связывает с formData.title
+             - style="width: 50vh" делает ширину 50% от высоты viewport
+             - required делает поле обязательным -->
         <input style="width: 50vh"
                type="text"
                id="title"
@@ -27,31 +48,43 @@
                required>
       </div>
 
-      <!-- Описание -->
+      <!-- ===== Поле для описания ===== -->
       <div class="form-group">
         <label for="description">Описание:</label>
+
+        <!-- Текстовое поле (можно заменить на textarea для многострочного ввода):
+             - v-model связывает с formData.description -->
         <input style="width: 50vh"
                type="text"
                id="description"
                v-model="formData.description">
-        </input>
+        </input> <!-- Здесь лучше использовать <textarea> для описаний -->
       </div>
 
-      <!-- Выбор тегов -->
+      <!-- ===== Секция выбора тегов ===== -->
       <div class="form-group">
         <label>Теги:</label>
+
+        <!-- Контейнер для чекбоксов тегов -->
         <div class="tags">
+          <!-- Генерация чекбоксов для каждого доступного тега:
+               - v-for перебирает availableTags
+               - v-model связывает массив formData.tags
+               - :value привязывает значение тега -->
           <label v-for="tag in availableTags" :key="tag">
             <input
                 type="checkbox"
                 v-model="formData.tags"
                 :value="tag"
             >
-            {{ tag }}
+            {{ tag }} <!-- Отображаем название тега -->
           </label>
         </div>
       </div>
 
+      <!-- Кнопка отправки формы:
+           - :disabled блокирует кнопку во время отправки
+           - Текст меняется в зависимости от состояния isSubmitting -->
       <button type="submit" :disabled="isSubmitting">
         {{ isSubmitting ? 'Загрузка...' : 'Сохранить' }}
       </button>
@@ -60,10 +93,13 @@
 </template>
 
 <script setup>
+// Объявляем события, которые может генерировать этот компонент
 const emit = defineEmits(['submit']);
 
+// Доступные теги для выбора пользователем
 const availableTags = ['puma', 'lynx'];
 
+// Реактивные данные формы
 const formData = reactive({
   photo: null,
   title: '',
@@ -71,9 +107,16 @@ const formData = reactive({
   tags: []
 });
 
+// URL для предпросмотра выбранного изображения
 const previewUrl = ref('');
+// Флаг состояния загрузки (для отключения кнопки во время отправки)
 const isSubmitting = ref(false);
 
+
+/**
+ * Обработчик изменения выбранного файла
+ * @param {Event} e - Событие изменения input[type="file"]
+ */
 const handleFileChange = (e) => {
   const file = e.target.files[0];
   if (file) {
@@ -104,11 +147,13 @@ const handleSubmit = () => {
   isSubmitting.value = false;
 };
 
+
+/**
+ * Обработчик закрытия формы
+ */
 const handleClose = () => {
   emit('close');
 };
-
-
 </script>
 
 <style scoped>
@@ -142,7 +187,7 @@ input[type="file"] {
 
 .tags {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /*элементы могут переноситься на следующую строку или столбец*/
   gap: 10px;
   padding: 10px;
 }
@@ -150,6 +195,7 @@ input[type="file"] {
 .tags label {
   display: flex;
   align-items: center;
+  /* отступ в 5 пикселей между элементами в сетке или колонках */
   gap: 5px;
   font-weight: normal;
 }
@@ -169,6 +215,8 @@ input[type="file"] {
 .preview-image {
   max-width: 100%;
   max-height: 100%;
+  /* изображение пропорционально масштабируется,
+  чтобы целиком поместиться внутри родительского элемента. */
   object-fit: contain;
 }
 
