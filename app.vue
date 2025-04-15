@@ -23,13 +23,13 @@
       </nav>
     </header>
 
-    <!-- Main content -->
+    <!-- Мой контент -->
     <main class="main-content">
-      <NuxtLayout>
-        <transition name="page">
-          <NuxtPage/>
-        </transition>
-      </NuxtLayout>
+      <!-- Transition в Nuxt — это компонент,
+       который позволяет создавать анимацию при переходах между маршрутами. -->
+      <transition name="page">
+        <NuxtPage/>
+      </transition>
     </main>
 
     <!-- Footer -->
@@ -39,6 +39,7 @@
   </div>
 </template>
 
+<!-- указывает на синтаксис для использования Composition API внутри однофайловых компонентов -->
 <script setup>
 import {ref} from 'vue';
 
@@ -50,11 +51,14 @@ const toggleMenu = () => {
 };
 </script>
 
+<!-- указывает, что стили применяются не ко всему документу,
+а только к родительскому элементу и его дочерним элементам. -->
 <style scoped>
 /* Layout container */
 .layout {
   display: flex;
   flex-direction: column;
+  /*не допускает, чтобы значение свойства height стало меньше, чем значение, указанное для min-height*/
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
   background-color: #FFFBF0;
@@ -66,16 +70,20 @@ const toggleMenu = () => {
   padding: 20px;
   display: flex;
   justify-content: flex-end; /* Выравнивание содержимого вправо */
+  /* смещение чисто визуальное и не затрагивает положение соседних элементов */
   position: relative;
 }
 
 /* Hamburger menu */
 .hamburger-menu {
+  /* внещний вид курсора */
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 5px;
   position: absolute;
+  /* Чем выше значение z-индекса, тем ближе элемент будет
+  располагаться к верхней части порядка наложени */
   z-index: 2; /* Увеличиваем приоритет кнопки над меню */
 }
 
@@ -125,6 +133,7 @@ nav ul li a {
 .header ul {
   display: flex;
   justify-content: center;
+  /* у списка будут отсутствовать маркеры */
   list-style-type: none;
 }
 
@@ -143,9 +152,10 @@ nav ul li a {
 
 /* Main Content */
 .main-content {
-  flex: 1; /* This ensures the content grows and takes up available space */
+  flex: 1; /* элемент будет увеличиваться, чтобы заполнить доступное пространство */
 }
 
+/* анимация плавного перехода между страницами */
 .page-enter-active, .page-leave-active {
   transition: opacity 0.5s ease-in-out;
 }
